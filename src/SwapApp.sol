@@ -8,7 +8,7 @@ import "../lib/openzeppelin-contracts/contracts/token/ERC20/utils/SafeERC20.sol"
 
 contract SwapApp {
     using SafeERC20 for IERC20;
-    address V2Router02;
+    address public V2Router02;
 
     event Swap(address tokenIn, address tokenOut, uint amountIn, uint amountOut);
 
