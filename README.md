@@ -1,66 +1,40 @@
-## Foundry
+# SwapApp Smart Contract
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This contract allows users to swap ERC20 tokens via a Uniswap V2 compatible router.
 
-Foundry consists of:
+---
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## ⚙️ Features
 
-## Documentation
+- Swap exact amounts of input tokens for output tokens
+- Uses SafeERC20 for secure token transfers and approvals
+- Emits events on each swap for easy tracking
 
-https://book.getfoundry.sh/
+---
 
-## Usage
+## 📝 Key Functions
 
-### Build
+- `swapTokens(uint amountIn, uint amountOutMin, address[] calldata path, uint deadline)`
+  - Transfers `amountIn` of the first token in `path` from user to contract
+  - Approves the Uniswap V2 router to spend tokens
+  - Calls the router's `swapExactTokensForTokens` function to swap tokens
+  - Sends swapped tokens directly to the user
+  - Emits `Swap` event with details of the swap
 
-```shell
-$ forge build
-```
+---
 
-### Test
+## 📢 Events
 
-```shell
-$ forge test
-```
+- `Swap(address tokenIn, address tokenOut, uint amountIn, uint amountOut)`
 
-### Format
+---
 
-```shell
-$ forge fmt
-```
+## ⚠️ Requirements
 
-### Gas Snapshots
+- User must approve this contract to spend `amountIn` of the input token before calling `swapTokens`
 
-```shell
-$ forge snapshot
-```
+---
 
-### Anvil
+## 📄 License
 
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
