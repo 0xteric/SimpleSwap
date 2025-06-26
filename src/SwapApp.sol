@@ -16,6 +16,13 @@ contract SwapApp {
         V2Router02 = _V2router02;
     }
 
+    /**
+     * Swaps any amount of tokens available on Uniswap V2 router pools
+     * @param amountIn amount of the token in
+     * @param amountOutMin minimum amount to receive of the token out
+     * @param path array of token addresses [tokenIn,tokenOut]
+     * @param deadline deadline time for the swap to complete
+     */
     function swapTokens(uint amountIn, uint amountOutMin, address[] calldata path, uint deadline) external {
         IERC20(path[0]).safeTransferFrom(msg.sender, address(this), amountIn);
         IERC20(path[0]).approve(V2Router02, amountIn);
